@@ -29,5 +29,6 @@ module.exports = {
         "adminCommand" : true
     },
 
+    "enabled" : true,
     "function" : command,
 };

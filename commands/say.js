@@ -10,6 +10,7 @@ function command(args, message) {
         return
     } else {
         message.channel.send(fullMessage)
+        message.delete({timeout:0})
     }
 }
 
@@ -23,5 +24,6 @@ module.exports = {
         "adminCommand" : true
     },
 
+    "enabled" : true,
     "function" : command,
 };

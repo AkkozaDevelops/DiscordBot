@@ -1,11 +1,11 @@
 
 function command(args, message) {
-    message.channel.send("poggers")
+    message.channel.send("pogchamp")
 }
 
 module.exports = {
     "commandInfo" : {
-        "name" : "k8",
+        "name" : "fuckunux",
         "description" : "this is a testing command",
         "usage" : "setstatus <status> <gameType> <gameName>",
 
@@ -13,5 +13,6 @@ module.exports = {
         "adminCommand" : true
     },
 
+    "enabled" : true,
     "function" : command,
 };
