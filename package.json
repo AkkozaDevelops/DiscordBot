@@ -6,7 +6,8 @@
   "dependencies": {
     "discord.js": "^12.4.0",
     "dotenv": "^8.2.0",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "import-fresh": "^3.2.1"
   },
   "devDependencies": {},
   "scripts": {

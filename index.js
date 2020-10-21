@@ -5,12 +5,14 @@ var prefix = "!mushroom"
 
 const dotenv = require('dotenv');
 const fs = require('fs');
+const importFresh = require('import-fresh');
 dotenv.config();
 
 // push globals
 
 global.fs = fs;
 global.client = client;
+global.importFresh = importFresh;
 
 // ------------
 
@@ -61,10 +63,22 @@ client.on("message", msg => {
             for (index = 0; index < files.length; index++) {
                 var info = require(`./commands/${files[index]}`)
         
-                helpMessage = `${helpMessage}\n${info.commandInfo.name} | ${info.commandInfo.description} | ${info.commandInfo.usage}`
+                helpMessage = `${helpMessage}\n${prefix}${info.commandInfo.name} | ${info.commandInfo.description} | ${info.commandInfo.usage}`
             }
 
             msg.channel.send(helpMessage)
+        } else if (command[0] == "reload") {
+            if (checkAdminStatus(msg.author.id)) {
+                var files = fs.readdirSync("./commands");
+
+                for (index = 0; index < files.length; index++) {
+                    var info = require(`./commands/${files[index]}`)
+
+                    if (info.commandInfo.name == command) {
+                        importFresh(`./commands/${files[index]}`)();
+                    }
+                }
+            }
         } else {
             var commandInfo = findCommand(command[0])
 
