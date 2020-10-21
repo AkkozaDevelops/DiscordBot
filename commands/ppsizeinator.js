@@ -46,7 +46,7 @@ const splashes = [
 
     {
         "min" : 20,
-        "max" : 25,
+        "max" : 900,
         "texts" : [
             "THAT THING IS HUGE??!"
         ]
@@ -79,6 +79,10 @@ function command(args, message) {
         cooldowns[message.author.id] = {"oncooldown":true, "endTime":(ms+cooldownTime*1000)};
 
         var pp = Math.floor(Math.random() * 26)
+
+        /*if (global.checkAdminStatus(message.author.id)) {
+            pp = 0
+        }*/
 
         var ppText = "8"
     

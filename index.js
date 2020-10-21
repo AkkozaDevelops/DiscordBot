@@ -10,14 +10,6 @@ dotenv.config();
 
 var cache = {}
 
-// push globals
-
-global.fs = fs;
-global.client = client;
-global.importFresh = importFresh;
-
-// ------------
-
 // functions
 
 function findCommand(command) {
@@ -56,7 +48,32 @@ function checkAdminStatus(userId) {
     return false
 }
 
+function getUserFromMention(mention) {
+	if (!mention) return;
+
+	if (mention.startsWith('<@') && mention.endsWith('>')) {
+		mention = mention.slice(2, -1);
+
+		if (mention.startsWith('!')) {
+			mention = mention.slice(1);
+		}
+
+		return client.users.cache.get(mention);
+	}
+}
+
 // ---------
+
+// push globals
+
+global.checkAdminStatus = checkAdminStatus;
+global.getUserFromMention = getUserFromMention;
+
+global.fs = fs;
+global.client = client;
+global.importFresh = importFresh;
+
+// ------------
 
 client.on('ready', () => {
     console.log("booted.")
