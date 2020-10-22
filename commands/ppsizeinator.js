@@ -71,7 +71,7 @@ function command(args, message) {
         var time = new Date();
         var ms = time.getTime()
 
-        message.channel.send(`This command is on cooldown for another ${Math.floor((cooldowns[message.author.id].endTime-ms)/1000)} second(s)`)
+        message.channel.send(`This command is on cooldown for another ${Math.floor((cooldowns[message.author.id].endTime-ms)/1000)} second(s)`).then((botMessage) => botMessage.delete({timeout:12000}))
     } else {
         var time = new Date();
         var ms = time.getTime()
@@ -79,20 +79,28 @@ function command(args, message) {
         cooldowns[message.author.id] = {"oncooldown":true, "endTime":(ms+cooldownTime*1000)};
 
         var pp = Math.floor(Math.random() * 26)
-
-        /*if (global.checkAdminStatus(message.author.id)) {
-            pp = 0
-        }*/
+        var vag = Math.floor(Math.random() * 1000) + 1
+        var splash = getSplash(pp)
 
         var ppText = "8"
     
+        if (message.author.id == 399416615742996480) {
+            pp = 0
+            splash = "colt you fucking suck lol"
+        }
+
         for (index = 0; index < pp; index++) {
             ppText = ppText + "="
         }
     
         ppText = ppText + ">"
+
+        if (vag < 10) {
+            ppText = "{()}"
+            splash = "that ain't even a dick?"
+        }
     
-        message.channel.send(`${message.author.username}'(s) pp is this big\n${ppText}\n${getSplash(pp)}`)
+        message.channel.send(`${message.author.username}'(s) pp is this big\n${ppText}\n${splash}`)
     
         setTimeout(function() {
             cooldowns[message.author.id] = {

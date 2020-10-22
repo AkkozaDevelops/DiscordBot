@@ -1,18 +1,18 @@
 
 function command(args, message) {
-    message.channel.send("pogchamp")
+    
 }
 
 module.exports = {
     "commandInfo" : {
-        "name" : "whatsupcolt",
+        "name" : "sdaaa",
         "description" : "this is a testing command",
         "usage" : "setstatus <status> <gameType> <gameName>",
 
         "requiresArgs" : true,
-        "adminCommand" : true
+        "adminCommand" : false
     },
 
-    "enabled" : true,
+    "enabled" : false,
     "function" : command,
 };

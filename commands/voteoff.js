@@ -6,9 +6,9 @@ function command(args, message) {
         if (user == message.author) {
             message.channel.send("You cannot vote yourself off, silly!")
         } else {
-            var impostor = Math.floor(Math.random() * 50) + 1
+            var impostor = Math.floor(Math.random() * 100) + 1
 
-            if (impostor < 30) {
+            if (impostor < 80) {
                 message.channel.send(`${user.username} has been voted off`).then((sentMessage) => {
                     var dots = 1
 
@@ -61,7 +61,7 @@ function command(args, message) {
             }
         }
     } else {
-        message.channel.send("Please include a user.")
+        message.channel.send("Please include a user.").then((botMessage) => botMessage.delete({timeout:12000}))
     }
 }
 

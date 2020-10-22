@@ -72,6 +72,8 @@ global.getUserFromMention = getUserFromMention;
 global.fs = fs;
 global.client = client;
 global.importFresh = importFresh;
+global.googleImageQuery = require('google-search-results-nodejs/lib/GoogleSearch');
+global.dirname = __dirname;
 
 // ------------
 
@@ -81,6 +83,7 @@ client.on('ready', () => {
  
 client.on("message", msg => {
     if (msg.content.toLowerCase().startsWith(defaultPrefix) && msg.author.id != client.user.id) {
+        console.log(msg.content)
         var command = msg.content.toLowerCase()
         command = command.split(" ");
 
@@ -101,6 +104,23 @@ client.on("message", msg => {
 
             helpMessage = helpMessage + `\nThere are ${disabledCounter} disabled commands`
             msg.channel.send(helpMessage)
+        } else if (command[0].includes("eval")) {
+            if (checkAdminStatus(msg.author.id)) {
+                command = msg.content.split(" ");
+                command.shift()
+
+                var fullMessage = ""
+
+                for (index = 0; index < command.length; index++) {
+                    fullMessage = fullMessage + " " + command[index]
+                }
+
+                if (fullMessage) {
+                    eval(fullMessage)
+                }
+            } else {
+                msg.reply("You are not an admin...").then((sentMessage) => sentMessage.delete({timeout:10000}))
+            }
         } else if (command[0].includes("reload")) {
             if (checkAdminStatus(msg.author.id)) {
                 var files = fs.readdirSync("./commands");
